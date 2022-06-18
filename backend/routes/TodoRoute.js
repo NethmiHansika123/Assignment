@@ -1,9 +1,8 @@
-const express = require('express')
-const TodoController = require('../controllers/ToDoController')
-const router = express.Router()
-router.route('/todo')
-    .post(TodoController.AddTodo)
-    .get(TodoController.View)
-    .delete(TodoController.DeleteDetails)
+const express = require('express');
+const router = express.Router();
+const Todocontroller = require('../controllers/ToDoController');
 
- module.exports = router
+router.post('/add', Todocontroller.AddDetails);
+router.get('/', Todocontroller.getDetails);
+router.post('/delete/:id', Todocontroller.deleteDetails);
+module.exports = router;  

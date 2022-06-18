@@ -3,14 +3,11 @@ const dotenv = require("dotenv");
 const connectDB = require("../backend/config/db");
 const TodoRoutes = require("./routes/TodoRoute");
 
-
-
-
 dotenv.config();
 
 
 const app = express();
-app.use('/add',TodoRoutes);
+app.use('/todo',TodoRoutes);
 
 connectDB()
 app.use(express.json());
