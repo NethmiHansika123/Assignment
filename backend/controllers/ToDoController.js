@@ -1,16 +1,18 @@
 const { Todo } = require("../models/ToDoModel");
 
-const AddDetails = async (req, res, next) => {
+const AddDetails = async(req,res,next)=>{
+
   let todo = new Todo(req.body);
-  await todo
-    .save()
-    .then((Todo) => {
-      res.status(200).json({ todo: "Todo is added succesfully" });
-    })
-    .catch((err) => {
-      res.status(400).send("unable to save database");
-    });
-};
+  todo.save()
+          .then(todo=>{
+              res.status(200).json({'todo':'Todo details are added successfully'});
+
+          })
+          .catch(err=>{
+              res.status(400).send("Unable to save to database");
+          });
+}
+
 const getDetails = async (req, res) => {
   await Todo.find(function (err, todo) {
     if (err) console.log(err);

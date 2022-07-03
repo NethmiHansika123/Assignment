@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import axios  from "axios";
+ import axios  from "axios";
 
 const initialState = {
     todo: [],
     status: null,
 };
 
-export const Todoinsert = createAsyncThunk<any>(
-    "todo/Todoinsert",
+export const TodoFetch = createAsyncThunk(
+    "todo/TodoFetch",
     async () => {
-       const response = await axios.post('http://localhost:3000/todo/add')
+       const response = await axios.get('http://localhost:5000/api/todo/')
        return response?.data
     }
 )
@@ -19,14 +19,12 @@ const todoSlice = createSlice({
     name: "todo",
     initialState,
     reducers: {
-        Todoinsert(state,action){
-            state.todo.push(action.payload);
-        },
     },
     extraReducers: {
-        // [Todoinsert.fulfilled]: (state,action) => {
-        //     state.todo = action.payload
-        // }
+        [TodoFetch.fulfilled.toString()]: (state,action) => {
+            state.todo = action.payload;
+        }
+       
     }
  
 });

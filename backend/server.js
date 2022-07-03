@@ -1,13 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("../backend/config/db");
-const TodoRoutes = require("./routes/TodoRoute");
+//const TodoRoutes = require("./routes/TodoRoute");
 
 dotenv.config();
 
 
 const app = express();
-app.use('/todo',TodoRoutes);
+//app.use('/todo',TodoRoutes);
+app.use('/api/todo', require('./routes/TodoRoute'));
 
 connectDB()
 app.use(express.json());

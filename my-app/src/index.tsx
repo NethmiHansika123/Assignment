@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import TodoReducer, {Todoinsert} from "./components/TodoSlice";
+import TodoReducer, {TodoFetch} from "./components/TodoSlice";
 
 const store = configureStore({
   reducer:{
@@ -11,7 +11,7 @@ const store = configureStore({
     todo: TodoReducer,
   },
 });
-store.dispatch(Todoinsert());
+store.dispatch(TodoFetch());
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
