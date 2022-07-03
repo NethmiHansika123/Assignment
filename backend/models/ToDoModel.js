@@ -11,7 +11,7 @@ let TodoSchema = new Schema({
 
     date : {
 
-        type : Date
+        type : String
     }
 
 

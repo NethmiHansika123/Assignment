@@ -1,13 +1,20 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("../backend/config/db");
-//const TodoRoutes = require("./routes/TodoRoute");
+
 
 dotenv.config();
-
-
 const app = express();
-//app.use('/todo',TodoRoutes);
+// app.use(async (ctx, next) => {
+//     ctx.response.set("Access-Control-Allow-Origin", "http://localhost:3000");
+//     ctx.response.set(
+//       "Access-Control-Allow-Methods",
+//       "GET, POST, OPTIONS, PUT, DELETE"
+//     );
+//     ctx.response.set("Access-Control-Allow-Methods", "*");
+//     await next();
+//   });
+
 app.use('/api/todo', require('./routes/TodoRoute'));
 
 connectDB()
