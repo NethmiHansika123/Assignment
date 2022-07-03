@@ -15,7 +15,7 @@ const app = express();
 //     await next();
 //   });
 
-app.use('/api/todo', require('./routes/TodoRoute'));
+app.use('/todo', require('./routes/TodoRoute'));
 
 connectDB()
 app.use(express.json());

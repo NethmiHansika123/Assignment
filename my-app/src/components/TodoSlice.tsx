@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export const TodoFetch = createAsyncThunk("todo/TodoFetch", async () => {
-  const response = await axios.get("http://localhost:5000/api/todo/");
+  const response = await axios.get("http://localhost:5000/todo/");
   return response?.data;
 });
 

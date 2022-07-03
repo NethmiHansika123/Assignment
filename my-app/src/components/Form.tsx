@@ -1,21 +1,18 @@
 import { FunctionComponent as FC } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+//import { useSelector } from "react-redux";
 import axios from "axios";
 import "./todo.scss";
+import {useGetAllTodoQuery} from './Todo.Api';
 import Button from "@mui/material/Button";
 import Checkbox from '@mui/material/Checkbox';
 
 const Form: FC = () => {
+  
+  //const {todo, status} = useSelector(state => state.todo)
+  const {data} = useGetAllTodoQuery({static: true});
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [todo, setTodo] = useState<any>([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/todo/").then((res) => {
-      const todo = res.data;
-      setTodo(todo);
-    });
-  }, []);
 
   const handleSubmit = () => {
     const details = {
@@ -24,7 +21,7 @@ const Form: FC = () => {
     };
 
     axios
-      .post("http://localhost:5000/api/todo/add", details)
+      .post("http://localhost:5000/todo/add", details)
       .then((response) => {
         if (response.data.success) {
           alert("Successfully Added");
@@ -36,7 +33,7 @@ const Form: FC = () => {
 
   const Delete = (id: string) => {
     axios
-      .post("http://localhost:5000/api/todo/delete/" + id)
+      .post("http://localhost:5000/todo/delete/" + id)
       .then((response) => {
         alert("successfully deleted");
       });
@@ -62,17 +59,17 @@ const Form: FC = () => {
         
       </form>
       <div>
-        {todo.map((Todo: { name: string; date: string }) => (
+        {data?.map((todo: { name: string; date: string }) => (
           <div>
             <Checkbox defaultChecked />
             <strong>
-              <p> {Todo.name}</p>
+              <p> {todo.name}</p>
             </strong>
             <strong>
-              <p> {Todo.date}</p>
+              <p> {todo.date}</p>
             </strong>
             <br />
-            <Button variant="contained" onClick={() => Delete(todo._id)}>
+            <Button variant="contained" onClick={() => Delete(data._id)}>
               DELETE
             </Button>
           </div>
